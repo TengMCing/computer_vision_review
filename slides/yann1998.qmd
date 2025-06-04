@@ -1,0 +1,854 @@
+---
+mermaid: 
+  theme: default
+format: 
+  revealjs:
+    transition-speed: fast
+    slide-number: c/t
+    css: slides.css
+    transition: fade
+    incremental: false 
+    theme: default
+    footer: "Slides URL: <https://cv-review.patrickli.org/slides> | Canberra time <span id = 'mel-local-time'></span>"
+    logo: figures/ANU_Primary_Horizontal_GoldBlack.png
+    self-contained: true
+    include-in-header: 
+      - file: slides.js
+description: "This slide summarizes the landmark 1998 paper by Yann LeCun and colleagues, which introduced the LeNet-5 convolutional neural network architecture and demonstrated its effectiveness for handwritten digit recognition. The paper established convolutional neural networks (CNNs) as powerful models for image-based tasks, highlighting their ability to learn hierarchical features directly from raw pixels using gradient-based training. By applying CNNs to document recognition, the authors set a new benchmark on the MNIST dataset and laid the groundwork for the modern deep learning revolution.
+"
+date: 2025-05-28
+categories: [Neural networks, Character recognition, 1998]
+image: listing_figures/yann1998.png
+---
+
+## Gradient-based learning applied to document recognition {.center style="text-align: right;"}
+
+Y. Lecun; L. Bottou; Y. Bengio; P. Haffner (1998)
+
+::: {style="color: #5A5A5A"}
+
+Historical Paper Review
+
+:::
+
+#### Patrick Li {style="margin-top: 40px; font-size: 0.9em"}
+
+::: {style="font-size: 0.9em"}
+
+BDSI, ANU
+
+:::
+
+---
+
+## Overview
+
+1. The 1998 computer vision landscape
+2. The problem with traditional pattern recognition
+3. Gradient-based learning revolution
+4. Convolutional neural network foundations
+5. LeNet-5
+6. Beyond LeNet: Graph transformer networks
+7. GTN Applications
+
+---
+
+## The 1998 computer vision landscape
+
+
+::: {style="font-size:120%"}
+
+
+```{mermaid}
+%%{init: {'themeVariables': { 'fontSize': '20px'}}}%%
+timeline
+    title Evolution of Pattern Recognition (Pre-1998)
+    1950s : Early Pattern Recognition in Cybernetics : Perceptron
+    1960s : Linear Classifiers & Perceptrons dominate : Expose limitations (XOR problem), triggering "AI winter" for neural networks
+    1970s : Statistical Decision Theory (Bayesian methods, k-NN, Fisher discriminant analysis) : Hidden Markov Models (HMMs)
+    1980-1984 : Symbolic AI & Expert Systems peak : Hand-crafted feature engineering dominates : Neocognitron introduced (early CNN)
+    1985-1989 : Backpropagation popularized : Neural networks revived
+    1990s : Support Vector Machines (SVMs) : Neural Networks struggle (Limited compute/data, but backpropagation improves) : Boosting algorithms
+    1998 : LeNet-5 (First practical CNN for digit recognition) : End-to-End Learning
+
+```
+
+:::
+
+
+---
+
+## Traditional pattern recognition
+
+:::: {.columns}
+::: {.column width=40%}
+
+```{mermaid}
+%%{init: {'themeVariables': { 'fontSize': '15px'}}}%%
+graph TD
+    A["Input Image"] --> B["Feature Extractor <br> (Handcrafted, Task-Specific)"]
+    B --> C["Low-Dimensional Representation <br> (Invariant to Distortions)"]
+    C --> D["Classifier <br> (General-Purpose, Trainable)"]
+    D --> E["Prediction / Label"]
+
+    subgraph " "
+        B
+        C
+        D
+    end
+
+```
+
+:::
+::: {.column width=60%}
+
+**Two-module system**
+
+1. Feature Extractor
+2. Classifier
+
+::: {.callout-warning}
+## Problem
+Recognition accuracy heavily depends on the designer's ability to create good features, which is time-consuming and problem-specific.
+:::
+
+
+:::
+::::
+
+---
+
+## Challenges in handwriting recognition
+
+
+Separating characters (**Segmentation**) within words/sentences is a major challenge.
+
+:::: {.columns}
+::: {.column width=50%}
+
+```{r warning=FALSE, message=FALSE, echo=FALSE, fig.cap="Real world handwriting will be 100x worse than this."}
+set.seed(10086)
+library(tidyverse)
+
+# Read the image file into an array
+img <- png::readPNG("figures/number_sample.png")
+
+# Convert to a rasterGrob (grid graphical object)
+g <- grid::rasterGrob(img, width = unit(1,"npc"), height = unit(1,"npc"))
+
+# Create plot and add background image
+ggplot() +
+  annotation_custom(g, xmin=-Inf, xmax=Inf, ymin=-Inf, ymax=Inf) +
+  geom_vline(aes(xintercept = runif(20) ^ 2), linetype = 2, size = 2) +
+  theme_void()
+
+```
+
+
+
+
+
+:::
+::: {.column width=50%}
+
+::: {.callout-note}
+## Heuristic Oversegmentation (HOS)
+
+Generates **potential cuts** between characters based on heuristics, then selects best combination based on recognizer scores.
+
+:::
+
+:::
+::::
+
+
+
+
+---
+
+## Shift to learning-based systems
+
+```{mermaid}
+%%{init: {'themeVariables': { 'fontSize': '20px'}}}%%
+graph TB
+        subgraph "Learning-Based Approach"
+        F[Raw Image] --> G[End-to-End<br/>Learning System]
+        G --> H[Output]
+        G -.-> I[("🤖 Automatic<br/>Feature Discovery")]
+    end
+    
+    subgraph "Traditional Approach"
+        A[Raw Image] --> B[Hand-crafted<br/>Feature Extractor]
+        B --> C[Trainable<br/>Classifier]
+        C --> D[Output]
+        B -.-> E[("👨‍💻 Human Expert<br/>Designs Features")]
+    end
+    
+    style E fill:#ffcccc
+    style I fill:#ccffcc
+```
+    
+1. **Faster hardware** enables brute-force numerical methods.
+2. **Large datasets** (e.g., MNIST) allow reliance on real data.
+3. **Powerful learning techniques** handle high-dimensional inputs and complex decision functions.
+
+---
+
+## Gradient-based learning
+
+```{mermaid}
+%%{init: {'themeVariables': { 'fontSize': '25px'}}}%%
+graph LR
+    A[Input Z] --> B[Learning Machine F]
+    B --> C[Output Y]
+    D[Parameters W] --> B
+    E[Desired Output D] --> F[Loss Function E]
+    C --> F
+    F --> G["Gradient $$\;\partial E/ \partial W$$"]
+    G --> H[Parameter Update]
+    H --> D
+    
+    style F fill:#ffffcc
+    style G fill:#ccffff
+```
+
+- **Learning machine** computes: $Y^p = F(Z^p, W)$, where$Z^p$ is input, $W$ is parameters.
+- **Loss function**: $E^p = D(D^p, F(W, Z^p))$, measuring discrepancy between desired and actual output.
+- **Average loss**: $E_{\text{train}}(W)$ over training set.
+    
+---
+
+## Generalization gap
+
+$$E_{\text{test}} - E_{\text{train}} = k(h/P)^\alpha,$$ 
+where $P$ is the number of training samples, $h$ is the model capacity, $\alpha \in [0.5, 1]$ and $k \in \mathbb{R}$ are constants.
+
+::: {.callout-note}
+## Tradeoff
+Increasing capacity reduces $E_{\text{train}}$ but increases the gap. Optimal capacity minimizes $E_{\text{test}}$.
+:::
+
+---
+
+## Structural risk minimization
+
+$$\arg\min_{W} \; E_{\text{train}} + \beta H(W),$$
+where $H(W)$ penalizes high-capacity parameters (regularization) and $\beta$ is a constant.
+
+::: {.callout-note}
+## In practice, **structural risk minimization** is usually achieved by:
+
+- Using models of increasing complexity (e.g., polynomial degree, network size)
+- Adding regularization penalties (e.g., L1/L2 regularization)
+- Selecting models via validation
+- ...
+:::
+
+
+---
+
+## Optimization techniques
+
+::: {style="position: fixed; left: -100px; width: 100vw;"}
+
+```{mermaid}
+%%{init: {'themeVariables': { 'fontSize': '18px'}}}%%
+graph TD
+    A[Optimization]
+
+    A --> B[Gradient Descent]
+    B --> B1["$$W_k = W_{k-1} - \varepsilon \; \frac{\partial E(W)}{\partial W}$$"]
+    B --> B2["`ε can be scalar, 
+    matrix, or adaptive`"]
+    B2 --> B2a[Examples: <br>quasi-Newton methods]
+
+    A --> C[Stochastic Gradient]
+    C --> C1["$$W_k = W_{k-1} - \varepsilon \; \frac{\partial E^{p_k}(W)}{\partial W}$$"]
+    C --> C2[Faster convergence for large, <br>redundant datasets]
+    C2 --> C2a[Examples: speech, <br>character recognition]
+```
+
+:::
+
+---
+
+## Popularization
+
+::: {style="font-size:90%"}
+
+The popularization of **gradient-based learning** was driven by three key events:
+
+1. **Local minima** were found not to be a major issue in practice.
+
+2. **Backpropagation algorithm** was introduced as a simple and efficient method to compute gradients in multilayer nonlinear systems.
+
+3. **Backpropagation** + **multilayer neural networks** + **sigmoidal units** was demonstrated to effectively solve complex learning problems.
+
+:::
+
+---
+
+## Backpropagation
+
+::: {style="font-size:75%"}
+
+Gradients are computed by **propagating errors backward** from the output layer to the input layer, using the **chain rule**.
+
+\begin{align*}
+\frac{\partial E^p}{\partial W_n} &= \frac{\partial F}{\partial W}(W_n, X_{n-1})\frac{\partial E^p}{\partial X_n} \\
+\frac{\partial E^p}{\partial X_{n-1}} &= \frac{\partial F}{\partial X}(W_n, X_{n-1})\frac{\partial E^p}{\partial X_n}, \\
+\end{align*}
+
+where $W_n$ and $X_n$ denote the weights and outputs of the $n$th layer, respectively. And $X_n = F_n(W_n, X_{n-1})$.
+
+:::
+
+::: {.callout-note}
+## 3Blue1Brown
+- [Backpropagation, intuitively | DL3](https://www.youtube.com/watch?v=Ilg3gGewQ5U) 
+- [Backpropagation calculus | DL4](https://www.youtube.com/watch?v=tIeHLnjs5U8)
+
+:::
+
+---
+
+## Why fully connected NNs struggle with character recognition?
+
+1. **High dimensionality**: Large input sizes lead to an explosion of parameters.
+
+```{r echo=FALSE}
+tf <- reticulate::import("tensorflow")
+input_layer <- tf$keras$layers$Input(shape = list(as.integer(64 * 64)))
+x <- tf$keras$layers$Dense(256L, 
+                           kernel_initializer = tf$keras$initializers$RandomNormal(seed = 10086L))(input_layer)
+x <- tf$keras$layers$Dense(2L, activation = "softmax", 
+                           kernel_initializer = tf$keras$initializers$RandomNormal(seed = 10086L))(x)
+keras_mod <- tf$keras$Model(input_layer, x)
+keras_mod$summary()
+```
+
+---
+
+## Why fully connected NNs struggle with character recognition?
+
+2. **No translation invariance**: The same object in a different place looks completely different.
+
+```{r echo=FALSE}
+verbar <- matrix(0, ncol = 64, nrow = 64)
+verbar_shift <- verbar
+verbar[, 1:3] <- 1
+verbar_shift[, 31:33] <- 1
+
+verbar <- reticulate::array_reshape(verbar, dim = c(1, 64 * 64))
+verbar_shift <- reticulate::array_reshape(verbar_shift, dim = c(1, 64 * 64))
+```
+
+```{r echo=TRUE}
+keras_mod$predict(verbar, verbose = 0L)
+keras_mod$predict(verbar_shift, verbose = 0L)
+```
+
+---
+
+## Why fully connected NNs struggle with character recognition?
+
+
+3. **Ignored input topology**: The **spatial structure** of images and **local correlations** are not inherently utilized.
+
+```{r}
+# Read the image file into an array
+img <- png::readPNG("figures/number_sample.png")
+
+# Convert to a rasterGrob (grid graphical object)
+g <- grid::rasterGrob(img, width = unit(1,"npc"), height = unit(1,"npc"))
+
+# Create plot and add background image
+ggplot() +
+  annotation_custom(g, xmin=-Inf, xmax=Inf, ymin=-Inf, ymax=Inf) +
+  annotate("rect", xmin = 1, ymin = 1, xmax = 5, ymax = 5, col = NA, fill = NA) +
+  annotate("rect", xmin = 1, ymin = 3.75, xmax = 1.25, ymax = 4, alpha = 0.5, fill = "red") +
+  annotate("rect", xmin = 2.25, ymin = 4.6, xmax = 2.5, ymax = 4.85, alpha = 0.5, fill = "red") +
+  theme_void()
+```
+
+
+---
+
+## Convolutional neural networks
+
+A **convolutional neural network** typically consists of:
+
+1. Convolutional layers 
+2. Subsampling (or pooling) layers
+3. Fully connected layers
+
+
+![](https://upload.wikimedia.org/wikipedia/commons/6/63/Typical_cnn.png)
+
+---
+
+## Local receptive fields
+
+![](figures/convolutional.png)
+
+- **Convolutional layers** connect each unit to a **small local region** of the previous layer.
+- **Local receptive fields** extract basic features (e.g. edges, corners), which are combined in deeper layers to detect higher order patterns.
+
+---
+
+## Weight sharing
+
+
+```{r}
+magick::image_read_pdf("figures/weight_sharing.pdf", pages = 1)
+```
+
+---
+
+
+
+## Weight sharing
+
+::: {style="font-size:80%"}
+
+$$\text{Weight sharing} = \text{shift invariance} + \text{less parameters} + \text{smaller generalization gap}$$
+
+:::
+
+- **Local feature detectors** can be applied across the image using **identical weights**.
+- **Multiple filters** extract **different features** at each location.
+- Shifted inputs produce **shifted feature maps**, making CNNs robust to shifts and distortions.
+- Weight sharing **reduces model capacity**, helping to reduce the train-test error gap.
+
+
+
+---
+
+## Spatial subsampling
+
+```{r}
+magick::image_read_pdf("figures/pooling.pdf", pages = 1)
+```
+
+Exact feature location is less important than **relative position**. Pooling reduces **resolution and sensitivity** to **shifts and distortions** by averaging over local neighbourhoods.
+
+---
+
+## LeNet-5
+
+```{mermaid}
+%%{init: {'themeVariables': { 'fontSize': '33px'}}}%%
+graph LR
+    Input["Input<br/>32×32×1<br/>Grayscale Image"] --> C1["Convolution<br/>6 filters, 5×5<br/>Output: <br/>28×28×6"]
+    C1 --> S2["Subsampling<br/>Average Pooling 2×2<br/>Output: <br/>14×14×6"]
+    S2 --> C3["Convolution<br/>16 filters, 5×5<br/>Output: <br/>10×10×16"]
+    C3 --> S4["Subsampling<br/>Average Pooling 2×2<br/>Output: <br/>5×5×16"]
+    S4 --> C5["Convolution<br/>120 filters, 5×5<br/>Output: <br/>1×1×120<br/>"]
+    C5 --> F6["Dense<br/>84 units<br/>tanh activation"]
+    F6 --> Output["Output Layer<br/>10 units<br/>Classes 0-9"]
+
+    classDef convLayer fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef poolLayer fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef fcLayer fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef inputOutput fill:#fff3e0,stroke:#e65100,stroke-width:2px
+
+    class Input,Output inputOutput
+    class C1,C3,C5 convLayer
+    class S2,S4 poolLayer
+    class F6 fcLayer
+```
+
+::: {.callout-tip}
+## Main characteristics
+
+- Feature maps increases as resolution decreases, **building invariance through richer representations**.
+- **Standardised inputs** accelerates training.
+- No padding is used, so feature maps shrink after convolution.
+- The final layer compares against 10 **prototype vectors** (RBF units) using Euclidean distance (prototype-based classification). It will produce **low activations for out-of-distribution inputs**.
+:::
+
+
+
+
+
+---
+
+## Discriminative MAP criterion
+
+Maximizes the **posterior probability of the correct class** while penalizing incorrect classes. 
+
+$$E(W) = \frac{1}{P} \sum_{p=1}^{P} \left( y_{D^p}(Z^p, W) + \log \left( e^{-j} + \sum_{i} e^{-y_i(Z^p, W)} \right) \right)$$
+
+- The output layer uses RBF units, where a **lower $y_{D^p}$** indicates better matching.
+- The term $e^{-j}$ accounts for a **"rubbish"** class to reject **non-character inputs**, where $j$ is a positive constant.
+
+---
+
+## Results
+
+- LeNet-5 achieves high accuracy on MNIST, with LeNet-1 outperforming larger fully connected networks.
+- Data augmentation and boosting (e.g., boosted LeNet-4) significantly improve performance.
+- CNNs scale well with data and preserve spatial structure, outperforming SVMs and KNN-based methods like tangent distance classifier.
+- SVMs perform surprisingly well despite lacking spatial priors, but are less efficient on large datasets.
+
+---
+
+## Multimodule systems
+
+```{mermaid}
+%%{init: {'themeVariables': { 'fontSize': '30px'}}}%%
+graph LR
+    A[Input Data] --> B[Module 1: <br/>Neural Network]
+    A --> C[Module 2: <br/>Frozen <br/>Embedding]
+    A --> D[Module 3: <br/>Nondifferentiable <br/>Function]
+    
+    B --> E[Intermediate <br/>Output 1]
+    C --> F[Intermediate <br/>Output 2]
+    D --> G[Intermediate <br/>Output 3]
+    
+    E --> H[Combiner <br/>Module]
+    F --> H
+    G --> H
+    
+    H --> I[Final Output]
+    I --> J[Loss Function]
+    
+    J -.->|∂L/∂θ| B
+    J -.->|No gradients| C
+    J -.->|∂L/∂θ <br/> via <br/>differentiable <br/>params| D
+    classDef trainable fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef frozen fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef nondiff fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef gradient stroke:#d32f2f,stroke-width:3px,stroke-dasharray: 5 5
+    
+    class B,H,K trainable
+    class C,L frozen
+    class D,M nondiff
+    class J gradient
+```
+
+
+Gradient-based learning (backpropagation) can be generalized to systems composed of **heterogeneous modules**, not just traditional neural networks.
+
+---
+
+## Graph transformer network (GTN)
+
+::: {style="font-size:70%"}
+
+Variable-length inputs can be represented using **directed graphs**, where each path corresponds to a possible sequence and **arcs carry vectors** containing information such as **probabilities, features, or penalties**.
+
+::: {.callout-important style="font-size:100%"}
+## In **GTN**, each module takes graph as input and output a graph.
+:::
+
+
+:::
+
+::: {.scroll-container style="overflow-y: scroll; height: 60%;"}
+```{r}
+magick::image_read_pdf("figures/speech.pdf", pages = 1)
+```
+:::
+
+
+---
+
+## Segmentation graph
+
+::: {style="font-size:80%"}
+**HOS** is a traditional segmentation method that generates candidate cuts using heuristics and selects the best one.
+
+- nodes represent **cuts**
+- arcs represent **ink segments** between cuts that could form characters
+:::
+
+
+
+    
+![](figures/HOS.png)
+
+---
+
+## Recognition transformer
+
+:::: {.columns}
+::: {.column width=50%}
+
+::: {style="font-size:80%"}
+
+The **recognition transformer** converts the segmentation graph into an **interpretation graph**.
+
+It processes **each segmentation arc** to generate all possible interpretations. 
+
+**Penalties from segmentation and recognition** are combined on interpretation arcs.
+
+
+:::
+
+
+:::
+::: {.column width=50%}
+
+![](figures/recognition.png)
+
+:::
+::::
+
+
+---
+
+## Viterbi transformer
+
+:::: {.columns}
+::: {.column width=50%}
+
+::: {style="font-size:80%"}
+
+The **Viterbi transformer** extracts the best interpretation using **dynamic programming**.
+
+It finds the lowest-penalty path in the interpretation graph (Viterbi path).
+
+
+:::
+
+
+:::
+::: {.column width=50%}
+
+![](figures/viterbi.png)
+
+:::
+::::
+
+---
+
+## Constrained interpretation graph
+
+::: {style="font-size:80%"}
+
+**During training**, a **path selector** is inserted between the interpretation graph and the Viterbi transformer. 
+
+This selector filters for all paths that **contain the correct label sequence**, producing what is known as the **constrained interpretation graph**.
+
+:::
+
+
+
+![](figures/cip.png)
+
+---
+
+## Viterbi training
+
+:::: {.columns}
+::: {.column width=50%}
+
+::: {style="font-size:80%"}
+Viterbi algorithm finds the best path, and we want it **close to the actual label sequence**.
+
+Loss = sum of penalties on the Viterbi-selected path.
+
+Only the final path receives gradient updates; others are zero.
+
+::: {.callout-warning}
+## Competing low-penalty paths are ignored.
+:::
+:::
+
+:::
+::: {.column width=50%}
+
+![](figures/v_training.png)
+
+:::
+::::
+
+---
+
+## Discriminative Viterbi training
+
+:::: {.columns}
+::: {.column style="overflow-y: scroll; height: 80%; width: 50%"}
+
+![](figures/dt.png)
+
+:::
+
+::: {.column style="font-size:70%; width: 50%"}
+
+Compute the **difference in penalties** between the **Viterbi path** and the **constrained Viterbi path**, and use it as a loss term.
+
+This penalizes incorrect predictions, but lacks a **margin** between classes. Once the penalties match, the gradient vanishes.
+
+Ideally, wrong paths should be penalized more if they are **too close** to the correct one.
+
+:::
+::::
+
+
+---
+
+## Discriminative forward training
+
+:::: {.columns}
+::: {.column width=45%}
+
+![](figures/dfl.png)
+
+:::
+::: {.column width=55%}
+
+::: {style="font-size:70%"}
+
+Computes the **"soft"** version of the `min` function over all path penalties **in both the constrained graph and unconstrained graph**:
+
+$$f_n = \text{logadd}_{i \in U_n}(c_i + f_{s_i}),$$
+where $\text{logadd}(x_1, x_2, ..., x_n) = -\log(\sum_{i=1}^n e^{-x_i})$, $U_n$ denotes the set of upstream arcs of node $n$, $c_i$ is the penalty on arc $i$, and $s_i$ is the source node of the arc.
+
+Unlike Viterbi, which selects the best path, this smoothly incorporates **all possible paths into the computation**.
+
+:::
+
+:::
+::::
+
+---
+
+## Space displacement neural network (SDNN)
+
+:::: {.columns}
+::: {.column width=50%}
+
+![](figures/sdnn.png)
+
+:::
+::: {.column width=50%}
+
+::: {style="font-size:80%"}
+
+We can avoid segmentation heuristics by **applying a CNN at every position in the image**, similar to how filters operate, to produce **character probabilities at each location**. 
+
+This output is then fed into a **Character Model Transducer** to construct the interpretation graph.
+
+:::
+
+:::
+::::
+
+---
+
+## Space displacement neural network (SDNN)
+
+:::: {.columns}
+::: {.column width=50%}
+
+![](figures/object_detect.png)
+
+:::
+::: {.column width=50%}
+
+::: {style="font-size:80%"}
+
+SDNN can be used for **brute-force object detection** by training a CNN to output the probability of an object (e.g., a dog) in a fixed-size image. 
+
+**Sweeping** this CNN **over a large image** produces a **2D probability heatmap**. 
+
+Repeating this at **multiple scales** allows detection of objects at different sizes.
+
+:::
+
+:::
+::::
+
+
+
+---
+
+## AMAP representation
+
+::: {style="font-size:80%"}
+
+**AMAP** encodes **pen trajectories** as low-resolution images, with each pixel holding a five-element feature vector: four features are associated to **four orientations of the pen trajectory in the area around the pixel** and one for **curvature**. It is invariant to stroke order and writing speed.
+
+:::
+
+:::: {.columns}
+::: {.column width=50%}
+
+![](figures/amap1.png)
+:::
+::: {.column width=50%}
+
+![](figures/amap2.png)
+:::
+::::
+
+---
+
+## Ex.1: online handwriting recognition
+
+:::: {.columns}
+::: {.column style="overflow-y: scroll; height: 80%; width: 50%"}
+
+![](figures/ol1.png)
+:::
+::: {.column style="overflow-y: scroll; height: 80%; width: 50%"}
+![](figures/ol2.png)
+:::
+::::
+
+---
+
+## Ex.2: check reading system
+
+:::: {.columns}
+::: {.column style="overflow-y: scroll; height: 80%; width: 50%"}
+
+![](figures/check.png)
+
+:::
+::: {.column width=50%}
+
+::: {style="font-size:80%"}
+
+::: {.callout-note}
+## Workflow
+
+1. Identify fields likely to contain the courtesy amount.
+2. Segment each field into characters, score interpretations, and select the most probable field and amount.
+
+:::
+
+:::
+
+
+:::
+::::
+
+---
+
+## Takeaways
+
+::: {style="font-size:80%"}
+
+1. Neural networks can handle **inputs and outputs of varying structure** (e.g. sequences, graphs) as long as the computation is differentiable. The **model parameters** can **remain fixed in size**.
+2. The same training approach applies when **choosing between discrete interpretations**, such as in structured prediction tasks.
+3. This 1998 paper laid the foundation for modern deep learning systems.
+  - Replacing handcrafted features with end-to-end learning
+  - Leveraging spatial structure via convolutional design
+  - Scaling models effectively, shown by LeNet-5’s success in document recognition.
+
+:::
+
+---
+
+## Thanks! Any questions? {.center}
+
+<br>
+
+- `r shiny::icon("code")` [TengMCing/computer_vision_review/slides](https://github.com/TengMCing/computer_vision_review/slides)
+- `r shiny::icon("github")` [TengMCing](https://github.com/TengMCing)
+- `r shiny::icon("envelope")` [patrick.li@anu.edu.au](mailto:patrick.li@anu.edu.au)
+- `r shiny::icon("user")` [https://patrickli.org](https://patrickli.org)
+
