@@ -3,6 +3,10 @@ project:
 
 website:
   title: "Computer Vision Paper Review"
+  site-url: https://cv-review.patrickli.org/
+  repo-url: https://github.com/TengMCing/computer_vision_review/
+  repo-branch: main
+  repo-actions: [edit, issue]
   navbar:
     left:
       - href: index.qmd
@@ -18,5 +22,4 @@ format:
     css: styles.css
     toc: true
 
-editor: visual
-
+editor: source
