@@ -1,0 +1,40 @@
+---
+about:
+  id: need-formatting
+  template: jolla
+  image: figures/patrick.jpg
+  links:
+    - icon: person-circle
+      text: My website
+      href: https://patrickli.org
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/weihao-li-b821301a4/
+    - icon: github
+      text: Github
+      href: https://github.com/TengMCing
+    - icon: google-scholar
+      text: Google Scholar
+      href: https://scholar.google.com.au/citations?user=RQ1HlFgAAAAJ&hl=en
+    - icon: orcid
+      text: ORCID
+      href: http://orcid.org/0000-0003-4959-106X
+---
+
+::: {#need-formatting}
+Dr Patrick (Weihao) Li is a Postdoctoral Research Fellow at the Biological Data Science Institute, Australian National University. He holds a Bachelor of Commerce (majoring in Business Analytics), an Honours degree in Econometrics, and a PhD in Statistics from the Department of Econometrics and Business Statistics at Monash University.
+
+His research focuses on machine learning, data visualization, visual inference, statistical software development, and computer vision, with a particular interest in automating the evaluation of diagnostic graphics and understanding how people interpret them.
+
+Patrick has developed and published multiple R packages on CRAN and GitHub, contributing to the open-source ecosystem for data analysis and visualization. He is a strong advocate for open and reproducible science, and regularly integrates tools such as Git, Quarto, and Jupyter into his workflows. He is proficient in R and Python, with growing experience in C and systems-level programming. He is also a member of the Statistical Society of Australia (SSA).
+:::
+
+## Contact
+
+-   `r fontawesome::fa("envelope")` [patrick.li@anu.edu.edu](mailto:patrick.li@anu.edu.edu)
+-   `r fontawesome::fa("location-dot")` 46 Sullivan's Creek Road, R.N. Robertson Building, The Australian National University, ACT 2600 Australia
+
+```{r echo = FALSE, include = FALSE}
+1 + 1
+```
+
