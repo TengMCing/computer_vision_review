@@ -847,7 +847,7 @@ Repeating this at **multiple scales** allows detection of objects at different s
 
 <br>
 
-- `r shiny::icon("code")` [TengMCing/computer_vision_review/slides](https://github.com/TengMCing/computer_vision_review/slides)
+- `r shiny::icon("code")` [TengMCing/computer_vision_review](https://github.com/TengMCing/computer_vision_review)
 - `r shiny::icon("github")` [TengMCing](https://github.com/TengMCing)
 - `r shiny::icon("envelope")` [patrick.li@anu.edu.au](mailto:patrick.li@anu.edu.au)
 - `r shiny::icon("user")` [https://patrickli.org](https://patrickli.org)
