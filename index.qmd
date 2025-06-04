@@ -1,0 +1,31 @@
+---
+engine: knitr
+---
+
+:::: {.columns}
+::: {.column width=80%}
+
+# Welcome to the Computer Vision Paper Review series!
+
+:::
+::: {.column width=20%}
+
+::: {style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 1.5em;"}
+
+![](figures/index.jpeg)
+
+:::
+
+:::
+::::
+
+
+
+Explore the evolution of computer vision research from the early days of convolutional neural networks to the cutting-edge transformer models. Along the way you will find insights into key tasks such as object detection, segmentation, and image generation.
+
+This collection is continuously updated with papers presented as Quarto slides. It is designed primarily as a structured learning resource for myself but I hope you find it helpful as well.
+
+If you spot any mistakes or have suggestions please let me know by reporting an issue here:
+[https://github.com/TengMCing/computer_vision_review/issues](https://github.com/TengMCing/computer_vision_review/issues)
+
+Thank you for visiting and happy learning.
