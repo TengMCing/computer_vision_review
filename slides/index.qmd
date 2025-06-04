@@ -1,0 +1,10 @@
+---
+title: "Slides"
+listing:
+  contents: "*.qmd"
+  sort: "date"
+  type: default
+  categories: true
+page-layout: full
+---
+
