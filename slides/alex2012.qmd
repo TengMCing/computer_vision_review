@@ -43,12 +43,11 @@ BDSI, ANU
 ## Overview
 
 1. The 1998 - 2012 computer vision landscape
-2. The object recognition problem
-3. Gradient-based learning revolution
-4. Convolutional neural network foundations
-5. LeNet-5
-6. Beyond LeNet: Graph transformer networks
-7. GTN Applications
+2. ImageNet and the object recognition problem  
+3. AlexNet architecture innovations
+4. Data augmentation
+5. Stochastic Gradient Descent (SGD)
+6. Breakthrough results and impact
 
 ---
 

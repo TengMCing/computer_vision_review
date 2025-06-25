@@ -368,7 +368,7 @@
     "href": "slides/alex2012.html#overview",
     "title": "Computer Vision Paper Review",
     "section": "Overview",
-    "text": "Overview\n\nThe 1998 - 2012 computer vision landscape\nThe object recognition problem\nGradient-based learning revolution\nConvolutional neural network foundations\nLeNet-5\nBeyond LeNet: Graph transformer networks\nGTN Applications"
+    "text": "Overview\n\nThe 1998 - 2012 computer vision landscape\nImageNet and the object recognition problem\n\nAlexNet architecture innovations\nData augmentation\nStochastic Gradient Descent (SGD)\nBreakthrough results and impact"
   },
   {
     "objectID": "slides/alex2012.html#the-1998---2012-computer-vision-landscape",
