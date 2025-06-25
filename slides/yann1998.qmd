@@ -17,7 +17,7 @@ format:
 description: "This slide summarizes the landmark 1998 paper by Yann LeCun and colleagues, which introduced the LeNet-5 convolutional neural network architecture and demonstrated its effectiveness for handwritten digit recognition. The paper established convolutional neural networks (CNNs) as powerful models for image-based tasks, highlighting their ability to learn hierarchical features directly from raw pixels using gradient-based training. By applying CNNs to document recognition, the authors set a new benchmark on the MNIST dataset and laid the groundwork for the modern deep learning revolution.
 "
 date: 2025-05-28
-categories: [Neural networks, Character recognition, 1998]
+categories: [Neural networks, Character recognition, Convolutional neural networks, 1998]
 image: listing_figures/yann1998.png
 ---
 

@@ -14,6 +14,76 @@
     "text": "Contact\n\n patrick.li@anu.edu.edu\n 46 Sullivan’s Creek Road, R.N. Robertson Building, The Australian National University, ACT 2600 Australia"
   },
   {
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Slides",
+    "section": "",
+    "text": "ImageNet Classification with Deep Convolutional Neural Networks\n\n\n\n\n\n\nNeural networks\n\n\nDeep learning\n\n\nImage classification\n\n\nConvolutional neural networks\n\n\n2012\n\n\n\nThis slide summarizes the landmark 2012 paper by Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. This work introduced AlexNet, a deep convolutional neural network that dramatically improved image classification performance on the ImageNet Large Scale Visual Recognition Challenge (ILSVRC). Leveraging GPU acceleration, ReLU activations, data augmentation, and dropout for regularization, AlexNet achieved a top-5 error rate of 15.3%, vastly outperforming previous methods. This breakthrough validated the power of deep learning at scale and marked the beginning of the modern era of deep convolutional neural networks in computer vision.\n\n\n\n\n\nMay 28, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nGradient-based learning applied to document recognition\n\n\n\n\n\n\nNeural networks\n\n\nCharacter recognition\n\n\nConvolutional neural networks\n\n\n1998\n\n\n\nThis slide summarizes the landmark 1998 paper by Yann LeCun and colleagues, which introduced the LeNet-5 convolutional neural network architecture and demonstrated its effectiveness for handwritten digit recognition. The paper established convolutional neural networks (CNNs) as powerful models for image-based tasks, highlighting their ability to learn hierarchical features directly from raw pixels using gradient-based training. By applying CNNs to document recognition, the authors set a new benchmark on the MNIST dataset and laid the groundwork for the modern deep learning revolution. \n\n\n\n\n\nMay 28, 2025\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to the Computer Vision Paper Review series!",
+    "section": "",
+    "text": "Welcome to the Computer Vision Paper Review series!\n\n\n\n\n\n\n\nExplore the evolution of computer vision research from the early days of convolutional neural networks to the cutting-edge transformer models. Along the way you will find insights into key tasks such as object detection, segmentation, and image generation.\nThis collection is continuously updated with papers presented as Quarto slides. It is designed primarily as a structured learning resource for myself but I hope you find it helpful as well.\nIf you spot any mistakes or have suggestions please let me know by reporting an issue here: https://github.com/TengMCing/computer_vision_review/issues\nThank you for visiting and happy learning."
+  },
+  {
+    "objectID": "topics.html",
+    "href": "topics.html",
+    "title": "Neural Network Building Blocks: A Comprehensive Timeline",
+    "section": "",
+    "text": "Perfect! Here’s a detailed and thematically grouped reading roadmap with 10+ key papers per topic to build your computer vision knowledge progressively. Topics include:"
+  },
+  {
+    "objectID": "topics.html#image-classification",
+    "href": "topics.html#image-classification",
+    "title": "Neural Network Building Blocks: A Comprehensive Timeline",
+    "section": "📦 1. Image Classification",
+    "text": "📦 1. Image Classification\nThese papers help you understand how CNNs evolved and how deep models classify entire images.\n\n\n\n\n\n\n\n\nYear\nTitle\nKey Idea\n\n\n\n\n1998\nLeNet (LeCun et al.)\nFirst CNN, digit recognition\n\n\n2012\nAlexNet (Krizhevsky et al.)\nDeep CNN + ReLU + GPU\n\n\n2014\nVGGNet (Simonyan & Zisserman)\nDeep networks with 3x3 filters\n\n\n2014\nGoogLeNet (Szegedy et al.)\nInception modules for efficiency\n\n\n2015\nResNet (He et al.)\nResidual connections enable depth\n\n\n2016\nWide ResNet\nTrade-off between depth and width\n\n\n2017\nDenseNet\nLayer connections via dense blocks\n\n\n2018\nSENet\nChannel-wise attention mechanism\n\n\n2019\nEfficientNet\nCompound model scaling\n\n\n2021\nConvNeXt\nCNN re-architected with Transformer tricks"
+  },
+  {
+    "objectID": "topics.html#object-detection",
+    "href": "topics.html#object-detection",
+    "title": "Neural Network Building Blocks: A Comprehensive Timeline",
+    "section": "🎯 2. Object Detection",
+    "text": "🎯 2. Object Detection\nThese papers trace the evolution from sliding window methods to anchor-free detectors.\n\n\n\nYear\nTitle\nKey Idea\n\n\n\n\n2001\nViola-Jones\nHaar features + Adaboost\n\n\n2014\nR-CNN (Girshick)\nCNN on region proposals\n\n\n2015\nFast R-CNN\nRoI pooling, end-to-end training\n\n\n2015\nFaster R-CNN\nRegion Proposal Network\n\n\n2016\nYOLOv1\nSingle-stage, real-time detection\n\n\n2017\nYOLOv2 / v3\nBetter accuracy, multi-scale\n\n\n2017\nRetinaNet\nFocal loss for class imbalance\n\n\n2018\nCascade R-CNN\nMulti-stage refinement\n\n\n2019\nCenterNet\nKeypoint-based, anchor-free\n\n\n2020\nYOLOv4 / v5\nIndustrial-friendly improvements\n\n\n2021\nDETR\nTransformer-based detection\n\n\n2022\nYOLOv7\nCutting-edge real-time detector"
+  },
+  {
+    "objectID": "topics.html#image-segmentation",
+    "href": "topics.html#image-segmentation",
+    "title": "Neural Network Building Blocks: A Comprehensive Timeline",
+    "section": "🧩 3. Image Segmentation",
+    "text": "🧩 3. Image Segmentation\nFocus shifts to per-pixel classification: semantic and instance segmentation.\n\n\n\n\n\n\n\n\nYear\nTitle\nKey Idea\n\n\n\n\n2015\nFCN (Long et al.)\nFirst end-to-end segmentation\n\n\n2015\nDeepLab\nAtrous convolution for context\n\n\n2016\nU-Net\nEncoder-decoder for biomedical images\n\n\n2017\nPSPNet\nPyramid scene parsing\n\n\n2017\nMask R-CNN\nInstance segmentation with RoIAlign\n\n\n2018\nDeepLabv3+\nEncoder-decoder, better boundary handling\n\n\n2019\nHRNet\nHigh-resolution feature learning\n\n\n2020\nPanoptic FPN\nUnified segmentation (semantic + instance)\n\n\n2020\nPointRend\nPoint-based refinement for boundaries\n\n\n2021\nSegFormer\nLightweight ViT-based segmentation\n\n\n2022\nMask2Former\nUnified model for all segmentation tasks"
+  },
+  {
+    "objectID": "topics.html#self-supervised-learning",
+    "href": "topics.html#self-supervised-learning",
+    "title": "Neural Network Building Blocks: A Comprehensive Timeline",
+    "section": "🧠 4. Self-Supervised Learning",
+    "text": "🧠 4. Self-Supervised Learning\nSelf-supervised methods learn representations without labels, crucial for pretraining.\n\n\n\nYear\nTitle\nKey Idea\n\n\n\n\n2014\nAutoencoders\nUnsupervised feature learning\n\n\n2017\nCPC (Oord et al.)\nContrastive predictive coding\n\n\n2020\nSimCLR\nContrastive learning with augmentations\n\n\n2020\nMoCo (v1–v3)\nMomentum contrast for large batches\n\n\n2020\nBYOL\nBootstrap latent views, no negatives\n\n\n2020\nSwAV\nOnline clustering of representations\n\n\n2021\nDINO\nViTs learn features without labels\n\n\n2021\nBarlow Twins\nRedundancy reduction\n\n\n2022\nMAE\nMasked autoencoding with ViTs\n\n\n2022\nVICReg\nVariance-Invariance-Covariance trade-off"
+  },
+  {
+    "objectID": "topics.html#vision-transformers-vits",
+    "href": "topics.html#vision-transformers-vits",
+    "title": "Neural Network Building Blocks: A Comprehensive Timeline",
+    "section": "🔁 5. Vision Transformers (ViTs)",
+    "text": "🔁 5. Vision Transformers (ViTs)\nTransformers, originally for NLP, now achieve top performance in vision.\n\n\n\n\n\n\n\n\nYear\nTitle\nKey Idea\n\n\n\n\n2020\nViT (Dosovitskiy et al.)\nPatch-based image transformers\n\n\n2021\nDeiT\nData-efficient ViT with distillation\n\n\n2021\nSwin Transformer\nHierarchical and shifted windows\n\n\n2021\nCvT\nHybrid convolution + attention\n\n\n2022\nFocal Transformer\nEfficient long-range modeling\n\n\n2022\nPVTv2\nLightweight backbone for dense prediction\n\n\n2022\nCrossViT\nMulti-scale patch attention\n\n\n2023\nInternImage\nUnified visual backbone\n\n\n2023\nSAM (Meta AI)\nSegment anything model\n\n\n2024\nDINOv2\nSelf-supervised ViTs for many tasks"
+  },
+  {
+    "objectID": "topics.html#image-generation-gans-diffusion",
+    "href": "topics.html#image-generation-gans-diffusion",
+    "title": "Neural Network Building Blocks: A Comprehensive Timeline",
+    "section": "🎨 6. Image Generation (GANs & Diffusion)",
+    "text": "🎨 6. Image Generation (GANs & Diffusion)\nGenerative models synthesize realistic images from noise or prompts.\n\n📌 GANs\n\n\n\nYear\nTitle\nKey Idea\n\n\n\n\n2014\nGANs (Goodfellow)\nMinimax adversarial learning\n\n\n2016\nDCGAN\nDeep CNN for generative modeling\n\n\n2017\nWGAN / WGAN-GP\nBetter stability with Wasserstein loss\n\n\n2018\nProgressive GAN\nProgressive image resolution\n\n\n2019\nStyleGAN\nStyle-based generator for faces\n\n\n2020\nStyleGAN2\nFewer artifacts, better realism\n\n\n2021\nStyleGAN3\nAlias-free generation\n\n\n2021\nBigGAN\nHigh-quality class-conditional images\n\n\n\n\n\n📌 Diffusion\n\n\n\nYear\nTitle\nKey Idea\n\n\n\n\n2020\nDDPM (Ho et al.)\nDenoising diffusion probabilistic models\n\n\n2021\nImproved DDPM\nClass-conditional generation\n\n\n2022\nImagen (Google)\nText-to-image with T5 encoder\n\n\n2022\nStable Diffusion\nOpen-source text-to-image\n\n\n2023\nConsistency Models\nSpeed up diffusion sampling\n\n\n2024\nSora (OpenAI)\nVideo generation from text\n\n\n\n\nWould you like:\n\nA downloadable version (PDF/Quarto/Notion)?\nLinks to open-source codebases or implementations?\nSlide-style summaries for each?\n\nLet me know your preferred format and next topic (e.g., medical CV, multimodal, 3D vision, etc.)."
+  },
+  {
+    "objectID": "topics.html#other-topics-generated-by-claude",
+    "href": "topics.html#other-topics-generated-by-claude",
+    "title": "Neural Network Building Blocks: A Comprehensive Timeline",
+    "section": "7. Other topics generated by Claude",
+    "text": "7. Other topics generated by Claude"
+  },
+  {
     "objectID": "slides/yann1998.html#gradient-based-learning-applied-to-document-recognition",
     "href": "slides/yann1998.html#gradient-based-learning-applied-to-document-recognition",
     "title": "Computer Vision Paper Review",
@@ -287,17 +357,122 @@
     "text": "Thanks! Any questions?\n\n\n TengMCing/computer_vision_review\n TengMCing\n patrick.li@anu.edu.au\n https://patrickli.org\n\n\n\n\n\nSlides URL: https://cv-review.patrickli.org/slides | Canberra time"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to the Computer Vision Paper Review series!",
-    "section": "",
-    "text": "Welcome to the Computer Vision Paper Review series!\n\n\n\n\n\n\n\nExplore the evolution of computer vision research from the early days of convolutional neural networks to the cutting-edge transformer models. Along the way you will find insights into key tasks such as object detection, segmentation, and image generation.\nThis collection is continuously updated with papers presented as Quarto slides. It is designed primarily as a structured learning resource for myself but I hope you find it helpful as well.\nIf you spot any mistakes or have suggestions please let me know by reporting an issue here: https://github.com/TengMCing/computer_vision_review/issues\nThank you for visiting and happy learning."
+    "objectID": "slides/alex2012.html#imagenet-classification-with-deep-convolutional-neural-networks",
+    "href": "slides/alex2012.html#imagenet-classification-with-deep-convolutional-neural-networks",
+    "title": "Computer Vision Paper Review",
+    "section": "ImageNet Classification with Deep Convolutional Neural Networks",
+    "text": "ImageNet Classification with Deep Convolutional Neural Networks\nA. Krizhevsky; I. Sutskever; G. E. Hinton (2012)\n\nHistorical Paper Review\n\nPatrick Li\n\nBDSI, ANU"
   },
   {
-    "objectID": "slides/index.html",
-    "href": "slides/index.html",
-    "title": "Slides",
-    "section": "",
-    "text": "Gradient-based learning applied to document recognition\n\n\n\n\n\n\nNeural networks\n\n\nCharacter recognition\n\n\n1998\n\n\n\nThis slide summarizes the landmark 1998 paper by Yann LeCun and colleagues, which introduced the LeNet-5 convolutional neural network architecture and demonstrated its effectiveness for handwritten digit recognition. The paper established convolutional neural networks (CNNs) as powerful models for image-based tasks, highlighting their ability to learn hierarchical features directly from raw pixels using gradient-based training. By applying CNNs to document recognition, the authors set a new benchmark on the MNIST dataset and laid the groundwork for the modern deep learning revolution. \n\n\n\n\n\nMay 28, 2025\n\n\n\n\n\n\nNo matching items"
+    "objectID": "slides/alex2012.html#overview",
+    "href": "slides/alex2012.html#overview",
+    "title": "Computer Vision Paper Review",
+    "section": "Overview",
+    "text": "Overview\n\nThe 1998 - 2012 computer vision landscape\nThe object recognition problem\nGradient-based learning revolution\nConvolutional neural network foundations\nLeNet-5\nBeyond LeNet: Graph transformer networks\nGTN Applications"
+  },
+  {
+    "objectID": "slides/alex2012.html#the-1998---2012-computer-vision-landscape",
+    "href": "slides/alex2012.html#the-1998---2012-computer-vision-landscape",
+    "title": "Computer Vision Paper Review",
+    "section": "The 1998 - 2012 computer vision landscape",
+    "text": "The 1998 - 2012 computer vision landscape\n\n\n\n\n\n%%{init: {'themeVariables': { 'fontSize': '20px'}}}%%\ntimeline\n    title The Dawn of Deep Learning (1998-2012)\n        1998 : LeNet-5 \n        2006 : Deep Belief Nets : Layer-wise Training\n        2008 : Denoising Autoencoders\n        2009 : GPU Acceleration : ImageNet\n        2010 : Deep Big Simple Nets : ReLU Activation Becomes Popular : ILSVRC\n        2011 : High Performance CNNs\n        2012 : Dropout : AlexNet"
+  },
+  {
+    "objectID": "slides/alex2012.html#the-object-recognition-problem",
+    "href": "slides/alex2012.html#the-object-recognition-problem",
+    "title": "Computer Vision Paper Review",
+    "section": "The object recognition problem",
+    "text": "The object recognition problem\n\nObject recognition requires models that generalize across many visual categories.\nCNNs are particularly well-suited for this task due to two key assumptions about image:\n\nStationarity of statistics (patterns like edges appear throughout the image)\nLocality of pixel dependencies (nearby pixels are more related)\n\n\n\n\n\n\n\nNote\n\n\nCompared to fully connected networks, CNNs have far fewer parameters due to weight sharing and local connectivity, making them easier to train and more data-efficient. Although the theoretical best performance may be slightly lower, practical performance is often superior."
+  },
+  {
+    "objectID": "slides/alex2012.html#dataset",
+    "href": "slides/alex2012.html#dataset",
+    "title": "Computer Vision Paper Review",
+    "section": "Dataset",
+    "text": "Dataset\n\n\n\n\n\nImageNet contains over 15 million labeled high-resolution images across more than 22,000 categories.\nILSVRC 2012 (ImageNet Large Scale Visual Recognition Challenge) uses a curated subset:\n\n~1.2 million training images\n~50,000 validation images\n~150,000 test images"
+  },
+  {
+    "objectID": "slides/alex2012.html#alexnet",
+    "href": "slides/alex2012.html#alexnet",
+    "title": "Computer Vision Paper Review",
+    "section": "AlexNet",
+    "text": "AlexNet\n\nAlexNet consists of five convolutional layers followed by three fully connected layers. It outputs predictions across 1,000 classes using a softmax layer and contains approximately 61 million parameters.\n\nDeeper networks lead to better performance (Simonyan & Zisserman, 2014)"
+  },
+  {
+    "objectID": "slides/alex2012.html#relu-activation",
+    "href": "slides/alex2012.html#relu-activation",
+    "title": "Computer Vision Paper Review",
+    "section": "ReLU activation",
+    "text": "ReLU activation\nInstead of traditional tanh or sigmoid activations, AlexNet uses the Rectified Linear Unit (ReLU):\n\\[\nf(x) = \\max(0, x)\n\\]\nReLU enabled significantly faster training and helped avoid vanishing gradients, quickly becoming the default activation in deep learning."
+  },
+  {
+    "objectID": "slides/alex2012.html#multi-gpu-training",
+    "href": "slides/alex2012.html#multi-gpu-training",
+    "title": "Computer Vision Paper Review",
+    "section": "Multi-GPU training",
+    "text": "Multi-GPU training\n\nTo handle memory constraints, AlexNet splits its architecture across two GPUs:\n\nEach GPU processes a subset of the filters.\nCommunication occurs at certain layers.\n\nThis kind of manual model parallelism is uncommon in modern architectures, which typically use data parallelism.\n\n\n\n\n\n\n\n\\[\\text{GTX 580} \\times 2 \\approx \\text{H100} \\times 0.002\\]"
+  },
+  {
+    "objectID": "slides/alex2012.html#local-response-normalization-lrn",
+    "href": "slides/alex2012.html#local-response-normalization-lrn",
+    "title": "Computer Vision Paper Review",
+    "section": "Local Response Normalization (LRN)",
+    "text": "Local Response Normalization (LRN)\nLocal Response Normalization mimics lateral inhibition seen in biological neurons. For a given neuron at spatial location \\((x, y)\\) in channel \\(i\\), the normalized activation is:\n\\[\nb_{x,y}^i = \\frac{a_{x,y}^i}{\\left(k + \\alpha \\sum_{j = \\max(0, i - n/2)}^{\\min(N - 1, i + n/2)} (a_{x,y}^j)^2 \\right)^\\beta}\n\\]\nAlexNet uses \\(k=2\\), \\(n=5\\), \\(\\alpha=10^{-4}\\), \\(\\beta=0.75\\).\nThis technique normalizes across adjacent feature maps. It was later largely replaced by Batch Normalization."
+  },
+  {
+    "objectID": "slides/alex2012.html#overlapping-pooling",
+    "href": "slides/alex2012.html#overlapping-pooling",
+    "title": "Computer Vision Paper Review",
+    "section": "Overlapping pooling",
+    "text": "Overlapping pooling\n\n\nInstead of using disjoint pooling windows, AlexNet uses overlapping max pooling:\n\nPooling window: 3×3\nStride: 2\n\nWhile reducing over-fitting in their application, this strategy is now rarely used."
+  },
+  {
+    "objectID": "slides/alex2012.html#data-augmentation",
+    "href": "slides/alex2012.html#data-augmentation",
+    "title": "Computer Vision Paper Review",
+    "section": "Data augmentation",
+    "text": "Data augmentation\nImages are resized so the shorter side is 256 pixels, then cropped to 224×224 with mean pixel subtraction.\n\nTraining: Random 224×224 crops and horizontal flips.\nPrediction: Five fixed 224×224 crops (four corners + center) plus their horizontal flips, totaling 10 views. Final prediction is the average of these."
+  },
+  {
+    "objectID": "slides/alex2012.html#rgb-color-augmentation",
+    "href": "slides/alex2012.html#rgb-color-augmentation",
+    "title": "Computer Vision Paper Review",
+    "section": "RGB color augmentation",
+    "text": "RGB color augmentation\n\nTo simulate varying lighting conditions, PCA-based color augmentation is applied:\n\nCompute the principal components of RGB values on the training set.\nFor each image of each batch,\n\n\\[\n\\text{add } \\sum_{i=1}^3 \\alpha_i \\lambda_i p_i \\text{ to each pixel},\n\\]\nwhere \\(\\lambda_i\\) are eigenvalues, \\(p_i\\) are eigenvectors, and \\(\\alpha_i \\sim \\mathcal{N}(0, 0.1)\\)."
+  },
+  {
+    "objectID": "slides/alex2012.html#dropout",
+    "href": "slides/alex2012.html#dropout",
+    "title": "Computer Vision Paper Review",
+    "section": "Dropout",
+    "text": "Dropout\n\n\n\n\n\nDropout is used in the fully connected layers to prevent overfitting:\n\nDuring training, each neuron is randomly dropped with probability 0.5.\nAt prediction time, all neurons are used, and outputs are scaled by 0.5.\n\nThis technique reduces complex co-adaptations of neurons and improves generalization."
+  },
+  {
+    "objectID": "slides/alex2012.html#optimization",
+    "href": "slides/alex2012.html#optimization",
+    "title": "Computer Vision Paper Review",
+    "section": "Optimization",
+    "text": "Optimization\n\nOptimization is performed with Stochastic Gradient Descent (SGD):\n\\[\nv_{i+1} = \\mu v_i - \\eta \\left( \\nabla_\\theta J(\\theta_i)_{D_i} + \\lambda \\theta_i \\right)\n\\]\n\\[\n\\theta_{i+1} = \\theta_i + v_{i+1},\n\\] where \\(\\theta\\) is the model parameters, \\(v\\) is the velocity, \\(\\eta\\) is the learning rate, \\(\\mu = 0.9\\) is the momentum, \\(\\lambda = 0.0005\\) is the weight decay, and \\(\\nabla_\\theta J(\\theta)_{D_i}\\) is the gradient of the loss with respect to parameters average over the batch \\(D_i\\).\n\n\n\n\n\n\nTraining details\n\n\n\n\\(\\theta\\) initialized from \\(\\mathcal{N}(0, 0.01)\\)\nBiases in ReLU layers set to 1 to ensure gradient flow\n\\(\\eta\\) starts at 0.01, divided by 10 when validation error plateaus\nTotal of 3 \\(\\eta\\) reductions; training stops after ~90 epochs (~5–6 days on 2 GPUs)"
+  },
+  {
+    "objectID": "slides/alex2012.html#results",
+    "href": "slides/alex2012.html#results",
+    "title": "Computer Vision Paper Review",
+    "section": "Results",
+    "text": "Results\n\nAlexNet achieved breakthrough performance in ILSVRC 2012:\n\n\n\nModel\nTop-1 Error\nTop-5 Error\n\n\n\n\nSingle CNN\n40.7%\n18.2%\n\n\nEnsemble of 5 CNNs\n38.1%\n16.4%\n\n\nPretrained single CNN\n39.0%\n16.6%\n\n\nPretrained ensemble\n36.7%\n15.4%\n\n\n\n\n\n\n\n\n\nAdditional observations\n\n\n\nEarly layers learn color-agnostic (GPU1) and color-specific (GPU2) features.\nTop-5 predictions tend to be semantically close.\nEuclidean distances in fully connected layer representations reflect visual similarity."
+  },
+  {
+    "objectID": "slides/alex2012.html#takeaways",
+    "href": "slides/alex2012.html#takeaways",
+    "title": "Computer Vision Paper Review",
+    "section": "Takeaways",
+    "text": "Takeaways\n\n\nDepth matters: removing layers degrades performance.\nReLU drastically improved training speed.\nMulti-GPU training enabled large model capacity.\nAggressive data augmentation and dropout improved generalization.\nLarge-scale end-to-end learning proved effective (again).\n\n\nThis work marked the turning point for deep learning in computer vision, laying the foundation for modern models like VGG, ResNet, and beyond."
+  },
+  {
+    "objectID": "slides/alex2012.html#thanks-any-questions",
+    "href": "slides/alex2012.html#thanks-any-questions",
+    "title": "Computer Vision Paper Review",
+    "section": "Thanks! Any questions?",
+    "text": "Thanks! Any questions?\n\n\n TengMCing/computer_vision_review\n TengMCing\n patrick.li@anu.edu.au\n https://patrickli.org\n\n\n\n\n\nSlides URL: https://cv-review.patrickli.org/slides | Canberra time"
   }
 ]
