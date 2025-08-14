@@ -5,6 +5,7 @@ options(cli.progress_show_after = 0)
 options(cli.width = 200)
 
 # This virtualenv is installed in ~/.virtualenvs/pytorch
+virtualenv_install("pytorch", packages = c("torch", "torchvision", "torchinfo"))
 use_virtualenv("pytorch")
 py_builtins <- import_builtins(convert = FALSE)
 
@@ -277,7 +278,7 @@ cli_alert_success("Model saved to {.path tests/model/fashion_mnist_nn.pth}")
 
 # This is the recommend way to save and load model
 model <- NeuralNetwork()$to(device)
-model$load_state_dict(torch.load(here::here("tests/model/fashion_mnist_nn.pth"), 
+model$load_state_dict(torch$load(here::here("tests/model/fashion_mnist_nn.pth"), 
                                  weights_only = TRUE))
 
 
